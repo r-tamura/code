@@ -12,6 +12,7 @@
 #include "Actor.h"
 #include "SpriteComponent.h"
 #include "Ship.h"
+#include "Character.h"
 #include "BGSpriteComponent.h"
 
 Game::Game()
@@ -89,6 +90,8 @@ void Game::ProcessInput()
 
 	// Process ship input
 	mShip->ProcessKeyboard(state);
+	// Process character input
+	mCharacter->ProcessKeyboard(state);
 }
 
 void Game::UpdateGame()
@@ -179,6 +182,10 @@ void Game::LoadData()
 	};
 	bg->SetBGTextures(bgtexs);
 	bg->SetScrollSpeed(-200.0f);
+
+	mCharacter = new Character(this);
+	mCharacter->SetPosition(Vector2(300.0f, 100.0f));
+	mCharacter->SetScale(1.0f);
 }
 
 void Game::UnloadData()

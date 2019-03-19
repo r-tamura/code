@@ -20,9 +20,15 @@ public:
 	// Set/get the animation FPS
 	float GetAnimFPS() const { return mAnimFPS; }
 	void SetAnimFPS(float fps) { mAnimFPS = fps; }
+	void AddAnimDef(const std::vector<int>& def) { mAnimDefs.push_back(def); }
+	void SetAnim(int num) { mCurrAnim = num; mCurrFrame = 0.0f; }
 private:
 	// All textures in the animation
 	std::vector<SDL_Texture*> mAnimTextures;
+	// Animations
+	std::vector<std::vector<int>> mAnimDefs;
+	// Current Animation Index
+	int mCurrAnim;
 	// Current frame displayed
 	float mCurrFrame;
 	// Animation frame rate

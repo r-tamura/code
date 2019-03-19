@@ -24,6 +24,7 @@ Ship::Ship(Game* game)
 		game->GetTexture("Assets/Ship04.png"),
 	};
 	asc->SetAnimTextures(anims);
+	asc->AddAnimDef({ 0,1,2,3 });
 }
 
 void Ship::UpdateActor(float deltaTime)

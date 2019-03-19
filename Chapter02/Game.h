@@ -54,4 +54,5 @@ private:
 
 	// Game-specific
 	class Ship* mShip; // Player's ship
+	class Character* mCharacter; // For excersise 2-2
 };
