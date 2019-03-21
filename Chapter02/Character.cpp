@@ -1,5 +1,6 @@
 #include "Character.h"
 #include "AnimSpriteComponent.h"
+#include "TileMapComponent.h"
 #include "Game.h"
 
 Character::Character(Game* game)

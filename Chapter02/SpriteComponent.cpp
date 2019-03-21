@@ -18,6 +18,7 @@ SpriteComponent::SpriteComponent(Actor* owner, int drawOrder)
 	,mTexHeight(0)
 {
 	mOwner->GetGame()->AddSprite(this);
+
 }
 
 SpriteComponent::~SpriteComponent()

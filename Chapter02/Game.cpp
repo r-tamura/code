@@ -14,6 +14,7 @@
 #include "Ship.h"
 #include "Character.h"
 #include "BGSpriteComponent.h"
+#include "TileMapComponent.h"
 
 Game::Game()
 :mWindow(nullptr)
@@ -89,9 +90,9 @@ void Game::ProcessInput()
 	}
 
 	// Process ship input
-	mShip->ProcessKeyboard(state);
+	//mShip->ProcessKeyboard(state);
 	// Process character input
-	mCharacter->ProcessKeyboard(state);
+	//mCharacter->ProcessKeyboard(state);
 }
 
 void Game::UpdateGame()
@@ -157,35 +158,45 @@ void Game::GenerateOutput()
 void Game::LoadData()
 {
 	// Create player's ship
-	mShip = new Ship(this);
-	mShip->SetPosition(Vector2(100.0f, 384.0f));
-	mShip->SetScale(1.5f);
+	//mShip = new Ship(this);
+	//mShip->SetPosition(Vector2(100.0f, 384.0f));
+	//mShip->SetScale(1.5f);
 
-	// Create actor for the background (this doesn't need a subclass)
+	//// Create actor for the background (this doesn't need a subclass)
 	Actor* temp = new Actor(this);
 	temp->SetPosition(Vector2(512.0f, 384.0f));
-	// Create the "far back" background
-	BGSpriteComponent* bg = new BGSpriteComponent(temp);
-	bg->SetScreenSize(Vector2(1024.0f, 768.0f));
-	std::vector<SDL_Texture*> bgtexs = {
-		GetTexture("Assets/Farback01.png"),
-		GetTexture("Assets/Farback02.png")
-	};
-	bg->SetBGTextures(bgtexs);
-	bg->SetScrollSpeed(-100.0f);
-	// Create the closer background
-	bg = new BGSpriteComponent(temp, 50);
-	bg->SetScreenSize(Vector2(1024.0f, 768.0f));
-	bgtexs = {
-		GetTexture("Assets/Stars.png"),
-		GetTexture("Assets/Stars.png")
-	};
-	bg->SetBGTextures(bgtexs);
-	bg->SetScrollSpeed(-200.0f);
 
-	mCharacter = new Character(this);
-	mCharacter->SetPosition(Vector2(300.0f, 100.0f));
-	mCharacter->SetScale(1.0f);
+	SDL_Texture* tiletex = GetTexture("Assets/Tiles.png");
+	auto bg1 = new TileMapComponent(temp, "Assets/MapLayer1.csv", 3);
+	bg1->SetTexture(tiletex);
+	auto bg2 = new TileMapComponent(temp, "Assets/MapLayer2.csv", 2);
+	bg2->SetTexture(tiletex);
+	auto bg3 = new TileMapComponent(temp, "Assets/MapLayer3.csv", 1);
+	bg3->SetTexture(tiletex);
+
+
+	//// Create the "far back" background
+	//BGSpriteComponent* bg = new BGSpriteComponent(temp);
+	//bg->SetScreenSize(Vector2(1024.0f, 768.0f));
+	//std::vector<SDL_Texture*> bgtexs = {
+	//	GetTexture("Assets/Farback01.png"),
+	//	GetTexture("Assets/Farback02.png")
+	//};
+	//bg->SetBGTextures(bgtexs);
+	//bg->SetScrollSpeed(-100.0f);
+	//// Create the closer background
+	//bg = new BGSpriteComponent(temp, 50);
+	//bg->SetScreenSize(Vector2(1024.0f, 768.0f));
+	//bgtexs = {
+	//	GetTexture("Assets/Stars.png"),
+	//	GetTexture("Assets/Stars.png")
+	//};
+	//bg->SetBGTextures(bgtexs);
+	//bg->SetScrollSpeed(-200.0f);
+
+	//mCharacter = new Character(this);
+	//mCharacter->SetPosition(Vector2(300.0f, 100.0f));
+	//mCharacter->SetScale(1.0f);
 }
 
 void Game::UnloadData()
